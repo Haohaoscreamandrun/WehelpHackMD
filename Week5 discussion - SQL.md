@@ -6,10 +6,11 @@ Week 5 Discussion - SQL
 #### 關聯式資料庫管理(Relational Database Management System, RDBMS)
 Key是關聯式資料庫中最重的的元素，除了可以維持Tables之間的關係，也可以幫助準確判別table中的資料。關聯式資料庫如Oracle SQL和MySQL，使用一疊的表格同時表示資料與他們之間的關係。Primary key就是用於提取出表格中唯一列的工具；而Foreign key則是用於表達表格之間的關係。
 ### Primary key vs. Foreign key 的實際作用
-Primary key欄位不能包含任何null值，且必須各自是唯一值；他可以是已經存在的資料欄位，或是由資料庫自動生成，但一份表格中僅能有一欄；此constraint在已經連結至其他表格時(作為其他表格的Foreign key)無法被刪除(drop)。
-Foreign key欄位可能是一欄或多欄；通常是來自其他表格的Primary key。此欄位可以接受重複值與null(在此情況下無法連結至其他表格)，且可以在連結的子表格中刪除此constraint。
-有Primary key除了能夠指定唯一存在的列，也確保更快速得存取。而使用Foreign key可以讓我們不用再子表格中存儲同樣的欄位，只需要透過這個Foreign key連結到母表格中唯一的列中其他資訊。
-實際上，Foreign key constraint保證我們在子表格中新增任何資料時，都必須與母表格產生連結；實際利用上，可以用來確保訂單只在還有商品的情況下建立，且可以透過Foreign key找到下訂者或商品的詳細資料。
+1. Primary key欄位不能包含任何null值，且必須各自是唯一值；他可以是已經存在的資料欄位，或是由資料庫自動生成，但一份表格中僅能有一欄；此constraint在已經連結至其他表格時(作為其他表格的Foreign key)無法被刪除(drop)。Parent Table 刪除某個東西，會對應到 Child Table 的某些資料
+2. Foreign key欄位可能是一欄或多欄；通常是來自其他表格的Primary key。此欄位可以接受重複值與null(在此情況下無法連結至其他表格)，且可以在連結的子表格中刪除此constraint。
+>Constraint：保證資料的完整性，Child Table 不能放 Parent Table 沒有的東西；刪除 Parent Table 的資料時，確保 Child Table 對應的資料要先被刪除。
+3. 有Primary key除了能夠指定唯一存在的列，也確保更快速得存取。而使用Foreign key可以讓我們不用再子表格中存儲同樣的欄位，只需要透過這個Foreign key連結到母表格中唯一的列中其他資訊。
+4. 實際上，Foreign key constraint保證我們在子表格中新增任何資料時，都必須與母表格產生連結；實際利用上，可以用來確保訂單只在還有商品的情況下建立，且可以透過Foreign key找到下訂者或商品的詳細資料。
 ## 請示範操作如何使用 MySQL Workbench 產生 ERD (Entity Relationship Diagram)
 [How to Create a Simple ERD in MySQL Workbench](https://www.databasestar.com/mysql-workbench-erd/)
 1. 在MySQL Workbench中建立資料庫與表格。
@@ -62,7 +63,16 @@ mysql> explain analyze SELECT * FROM member WHERE username='test' and password='
 ![W5D](/Week5%20discussion_1.png)
 ![W5D](/Week5%20discussion_2.png)
 ![W5D](/Week5%20discussion_3.png)
-key欄可以判斷MySQL有無使用索引查詢
+> 1. partitions顯示此查詢有命中了那些有作資料表分區的那些分區
+> 2. type顯示連接使用的類型，可以用來判斷命令執行的效能。
+>   1. const: 查詢使用主鍵或唯一索引時，表返回僅有一行。
+>   2. ref: 一般針對於使用非唯一索引的查詢，或普通索引查詢的條件滿足索引的最左匹配原則。
+>   3. fulltext: 使用到全文索引。
+>   4. ALL: 全表掃描。實務上看到需要優化。
+> 3. key欄可以判斷MySQL有無使用索引查詢
+> 4. rows:執行本次查詢找到結果估計需要讀取的數據行數。(就是說你這句查詢需要掃描的行數，所以理想狀態是越少越好。)
+> 5. filtered: 顯示查詢返回後的數據在過濾後剩下滿足條件的紀錄數比例。
+> 6. Extra: 顯示如何解析此查詢的附加訊息。
 依照analyze的結果，使用複合索引查詢的速度較快。
 
 ## 基於第五週的資料表設計，如果我們要進一步支援回覆留言的功能。你會怎麼設計新的、或修改舊的資料表來支援以某個留言 ID 選取該留言所有回覆的 SQL 語句？
