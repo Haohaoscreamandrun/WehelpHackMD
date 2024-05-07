@@ -87,13 +87,30 @@ inner join message_reply on message.id = message_reply_id
 ``` 
 
 ## 基於第五週的資料表設計，如果我們要進一步支援留言的額外關鍵字標籤紀錄 ( 請參考 WeHelp 技術文章的標籤概念 )。你會怎麼設計新的、或修改舊的資料表來支援選取所有標記特定關鍵字的留言資料的 SQL 語句？
-1. 在message table中新增tag column。
-```sql
-alter table message
-add tag1 varchar(25) default null
-...
-```
-2. 建立index
-```sql
-create index tag1_index on message(tag1);
-```
+
+Many to many 多對多
+一個留言可對應到多個標籤，一個標籤可以對到多個留言。
+
+Message
+
+- id int primary key auto_increment
+- user_id int not null
+- message varchar not null
+- data datetime default current_timestamp
+
+Tags
+
+- id int primary key auto_increment
+- tag_name varchar not null
+
+(加一個中間的關聯表為此類型的標準設計)
+Message_Tags
+
+- message_id int foreign key on message.id
+- tag_id int foreign key on tags.id
+
+
+SELECT message.* FROM message 
+INNER JOIN message_tags ON message.id=message_tags.message_id 
+INNER JOIN tags ON message_tags.tag_id=tags.id 
+WHERE tags.tag_name='關鍵字'
