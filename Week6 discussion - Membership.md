@@ -3,7 +3,7 @@ Week 6 Discussion - Membership
 ## 補充 - SQL injection攻擊及參數化查詢如何預防
 ### 何謂 SQL injection 攻擊?
 1. WHAT is SQL injection? 
-是一種可以攻擊所有支援SQL指令資料庫伺服器的方法。在2007-2010間被**開放式Web應用程式安全專案(OWASP)**選為前10大網路應用漏洞，並在2013年被列為第一大攻擊手段。
+是一種可以攻擊所有支援SQL指令資料庫伺服器的方法。在2007-2010間被 **開放式Web應用程式安全專案(OWASP)** 選為前10大網路應用漏洞，並在2013年被列為第一大攻擊手段。
 2. WHERE is it take place? 
 發生在應用程式提供使用者輸入介面，如身分驗證或搜尋功能；或程式使用Cookies或Session資料執行SQL查詢。
 3. WHAT KIND of database vulnerable to it? 
