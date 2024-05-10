@@ -45,7 +45,7 @@ SELECT * FROM users
 WHERE username='admin' OR '1'='1' 
 AND password='admin' OR '1'='1';
 ```
-> 因為```'1'='1'```永遠是True，對於SQL來說語意和以下相同：
+> 因為```'1'='1'```永遠是```True```，對於SQL來說語意和以下相同：
 ```sql
 SELECT * FROM users;
 ```
