@@ -17,21 +17,22 @@ Week 6 Discussion - Membership
 + 但只要登入過後，伺服器就只認session ID，所以如果有人取得了cookie儲存的session ID，他就可以使用你的帳號，稱為session hijacking。
 
 + 以下是常見的三種session攻擊手法：
-1. Session fixation
-    + 利用詐騙信件或其他方式，攻擊者指定一個有效的Session ID，讓使用者使用這個Session ID完成登入，攻擊者因此可以使用同一個Session ID欺騙伺服器已經通過登入驗證，進而回傳機密資訊。
-    + 比如攻擊者以Query字串的方式讓使用者跳轉到登入頁面並設定Session ID: http://innocentsite.org/login?PHPSESSID=0123456789ABCDEF
-    + 使用者以此Session ID登入，伺服器發現已有Session ID後沒有另外指派，攻擊者透過一樣的Session ID提出GET請求而得到原本需要先通過驗證的資訊。
-    + 解決方式是在每次使用者的重要操作之前都派發一個新的Session ID，不論每次取得Session的間隔為何，並在每次登出後抹除所有Session。
-2. Session hijacking
-    + 當攻擊者可以使用者存取請求和回復，而當使用者並未加密請求(比如只用URL傳送session ID)，攻擊者可以從請求當中看到Session ID，並直接加以利用。
-    + 攻擊者可能透過公用Wi-Fi做到窺視連線資料，或是綁架網域名稱讓使用者實際上是向攻擊者伺服器傳送請求。
-    + 跨站腳本攻擊：攻擊者通過在網頁中插入惡意的客戶端腳本代碼，使其在用戶瀏覽器上執行。比如在評論中發布包含用「```<script></script>```」標記括起來的可執行代碼。這些標記告訴 Web 瀏覽器將標記之間的所有內容解讀為 JavaScript 代碼。評論出現在頁面上之後，任何其他使用者載入網站時，其 Web 瀏覽器將執行指令碼標記之間的惡意代碼。
-3. Session prediction
-    + 如果 Session ID 的長度、複雜度、雜亂度不夠，就能夠被攻擊者猜測。攻擊者只要寫程式不斷暴力計算 Session ID，就有機會得到有效的 Session ID 而竊取使用者帳號。
-    + 通常套件內建的session ID生產function都有一定程度的安全性。
+    1. Session fixation
+        + 利用詐騙信件或其他方式，攻擊者指定一個有效的Session ID，讓使用者使用這個Session ID完成登入，攻擊者因此可以使用同一個Session ID欺騙伺服器已經通過登入驗證，進而回傳機密資訊。
+        + 比如攻擊者以Query字串的方式讓使用者跳轉到登入頁面並設定Session ID: http://innocentsite.org/login?PHPSESSID=0123456789ABCDEF
+        + 使用者以此Session ID登入，伺服器發現已有Session ID後沒有另外指派，攻擊者透過一樣的Session ID提出GET請求而得到原本需要先通過驗證的資訊。
+        + 解決方式是在每次使用者的重要操作之前都派發一個新的Session ID，不論每次取得Session的間隔為何，並在每次登出後抹除所有Session。
+    2. Session hijacking
+        + 當攻擊者可以使用者存取請求和回復，而當使用者並未加密請求(比如只用URL傳送session ID)，攻擊者可以從請求當中看到Session ID，並直接加以利用。
+        + 攻擊者可能透過公用Wi-Fi做到窺視連線資料，或是綁架網域名稱讓使用者實際上是向攻擊者伺服器傳送請求。
+        + 跨站腳本攻擊：攻擊者通過在網頁中插入惡意的客戶端腳本代碼，使其在用戶瀏覽器上執行。比如在評論中發布包含用「```<script></script>```」標記括起來的可執行代碼。這些標記告訴 Web 瀏覽器將標記之間的所有內容解讀為 JavaScript 代碼。評論出現在頁面上之後，任何其他使用者載入網站時，其 Web 瀏覽器將執行指令碼標記之間的惡意代碼。
+    3. Session prediction
+        + 如果 Session ID 的長度、複雜度、雜亂度不夠，就能夠被攻擊者猜測。攻擊者只要寫程式不斷暴力計算 Session ID，就有機會得到有效的 Session ID 而竊取使用者帳號。
+        + 通常套件內建的session ID生產function都有一定程度的安全性。
 > References:
 > 1. [cookie-session驗證原理以及express-session套件使用](https://johnnychang25678.medium.com/node-js-cookie-session%E9%A9%97%E8%AD%89%E5%8E%9F%E7%90%86%E4%BB%A5%E5%8F%8Aexpress-session%E5%A5%97%E4%BB%B6%E4%BD%BF%E7%94%A8-aeafa386837e)
 > 2. [深入 Session 與 Cookie：Express、PHP 與 Rails 的實作](https://github.com/aszx87410/blog/issues/46)
+> 3. [HTTP Session 攻擊與防護](https://devco.re/blog/2014/06/03/http-session-protection/)
 ## 哪些路徑的後端程式，必須驗證使用者為已登入的狀態？為什麼？
 1. 查詢或修改用戶資訊：當使用者訪問其個人資訊或帳戶設置頁面時，應該驗證使用者已經登入，以確保他們只能訪問自己的資訊。
 2. 付款資訊和訂單管理：當使用者查看其訂單記錄或付款資訊時，應該驗證使用者已登入，以防止未經授權的訪問。
@@ -46,6 +47,7 @@ document.getElementById("inputField").value = "Manipulated value";
 document.getElementById("myForm").submit();
 ```
 為避免此種情況，最好在後端也驗證過一次，確保使用者不能在繞過前端驗證後沒有其他把關方式。
+4. 先讓他在前端消失，還不要操作資料庫(Dcard:這則留言已被刪除)
 ## 為什麼我們應該使用 SQL 語句檢查某個帳戶是否存在，而不是把所有會員資料抓取後自己寫程式檢查？
 1. 效能問題：資料庫的資料量大時，SQL語法的查詢速度佔優勢，且只返回所需要的資料可以節省時間。
 2. 資料傳輸量：每次查詢都傳輸整張表格會浪費大量的傳輸空間，增加網路流量與資料庫負載。
@@ -65,6 +67,7 @@ def query_pagination(limit, offset):
     val = (limit, offset)
     mycursor.execute(sql,val)
 ```
+2. 快取?
 ## 請舉例說明什麼是 SQL Injection？如何防止？
 ### 何謂 SQL injection 攻擊?
 1. WHAT is SQL injection? 
