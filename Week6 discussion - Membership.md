@@ -3,10 +3,10 @@ Week 6 Discussion - Membership
 ## 使用 SessionMiddleware 管理的使用者狀態資訊，是否可能被任意竄改？
 + SessionMiddleware會在使用者建立一個新的session時生成一個隨機且唯一的session ID用於識別此session，並將此session ID儲存於client-side(cookie)，而其他資訊則儲存在server-side(session store)。
 
-   + client-side(key-value pair):
-> {user: s%3A**h30wc0pvSHJCYLVz0tui0Cv6NCCexGV8**.Cw7O3d354j%2FMcrxrXuWb65%2FRUpV6QdV07axdG0rZc8Y}
-   + server-side:
-> h30wc0pvSHJCYLVz0tui0Cv6NCCexGV8
+  + client-side(key-value pair):
+  ```{user: s%3A**h30wc0pvSHJCYLVz0tui0Cv6NCCexGV8**.Cw7O3d354j%2FMcrxrXuWb65%2FRUpV6QdV07axdG0rZc8Y}```
+  + server-side:
+  ```h30wc0pvSHJCYLVz0tui0Cv6NCCexGV8```
 
 + Session ID的資訊可以被讀取但無法被更改，因為經過簽名的訊息會同時附上一組鑑別碼；只要session ID被竄改，後面生成的鑑別碼就不一樣。
 
