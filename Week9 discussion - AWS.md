@@ -1,5 +1,10 @@
 # Week9 discussion - AWS
 
+## Linux 有這麼多分支，例如 Ubuntu、RHEL、Debian、Fedora、CentOS，以上這些不同分支之間是否有關連性？若有，關聯性是？
+
+Debian -> Ubuntu 較穩定
+Fedora -> CentOS -> RHEL (收費) 較穩定
+
 ## 什麼是 Linux Package Manager，請查詢 Ubuntu、RHEL 使用的 Package Manager 分別是？
 
 ### Package manager
@@ -14,6 +19,8 @@
     4. *package managers*通常會提供簡單的指令可以更新所有的*packages*。
 
 ### 常見的*Package Managers*
+
+[ref](https://www.vbird.org/linux_basic/centos7/0520rpm_and_srpm.php)
 
 #### APT(Advanced Package Tool)
 
@@ -39,6 +46,9 @@
 + 儲存格式: ```.rpm```
 
 ## 請查詢並試算，如果你現在使用的 EC2 Instance 完整運作一整個月，沒有免費額度的情況下，要花多少費用？
+
+[calculator](https://calculator.aws/#/addService)
+[IPv4收費](https://aws.amazon.com/tw/vpc/pricing/)
 
 ### 目前使用的EC2 instance 詳細資訊
 
@@ -82,3 +92,5 @@ for mrt in myresult:
 ```
 
 因有景點之mrt為null值，在return結果之前掃過一次
+
+> 可以嘗試用ORM，如果之後轉換資料庫也不用重寫
