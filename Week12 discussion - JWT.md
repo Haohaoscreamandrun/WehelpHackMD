@@ -66,8 +66,7 @@
 
 1. Cookie是由瀏覽器在請求時自動帶上的，但需要同網域，需要防 CSRF
 2. header bearer token 由前端在 request header 中手動放入 JWT，需要 local storage，需要防 XSS
-3. 同網域的話，用 cookie 會比較好，比較多安全的參數可以調整
-如 samesite、httponly、secure 等，跨網域只能（或建議）選擇用 bearer token。
+3. 同網域的話，用 cookie 會比較好，比較多安全的參數可以調整如 samesite、httponly、secure 等，跨網域只能（或建議）選擇用 bearer token。
 4. 用 cookies 就沒辦法同時兼顧到 mobile 端。
 
 ## 試說明 JWT 機制如何預防使用者竄改 Token？
@@ -99,7 +98,7 @@
 
 4. 第三部份：Verify Signature，將前兩部份的加密字串合併密鑰，再次進行加密。
 
-    ```json
+    ```plaintext
     // .mNJpvyczAWWzmStGmRe-b55PK2Jhfe_gQCT1rfioh0k
     HMACSHA256(
       base64UrlEncode(header) + "." +
