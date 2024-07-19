@@ -1,6 +1,6 @@
 # Stage 3 required skills set
 
-## Domain Name
+## Domain Name (Done)
 
 1. [AWS route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html#domain-register-procedure-section)
 2. [Sam Meech-Ward](https://www.youtube.com/watch?v=jDz4j_kkyLA)
@@ -10,6 +10,7 @@
 
 1. [Carl Medium](https://medium.com/@clu1022)
 2. [Sam Meech-Ward](https://www.youtube.com/watch?v=nQdyiK7-VlQ)
+3. [Caddy](https://caddyserver.com/)
 
 ## [Nginx](https://nginx.org/en/)
 
