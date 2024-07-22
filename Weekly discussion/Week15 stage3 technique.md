@@ -10,6 +10,7 @@
 
 1. [Carl Medium](https://medium.com/@clu1022)
 2. [Sam Meech-Ward](https://www.youtube.com/watch?v=nQdyiK7-VlQ)
+3. [Caddy](https://caddyserver.com/)
 
 ## [Nginx](https://nginx.org/en/)
 
