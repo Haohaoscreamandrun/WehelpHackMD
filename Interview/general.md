@@ -23,9 +23,13 @@
 
 ## 網站運作基本概念
 
-1. 盡可能仔細的描述，使用者在瀏覽器上打網址，最後看到一個網頁的背後過程。
-    - 瀏覽器向該網址發送GET請求
-    - 
+1. 盡可能仔細的描述，使用者在瀏覽器上打網址，最後看到一個網頁的背後過程。[link](https://www.freecodecamp.org/news/what-happens-when-you-hit-url-in-your-browser/)
+    - 瀏覽器解析URL，透過DNS取得網站IP位址
+    - 根據通訊協定建立和IP位址的連線, 以TCP/IP為例
+        - TCP-3 way handshake
+    - 瀏覽器像伺服器傳送GET請求
+    - 伺服器回傳網頁頁面程式碼、狀態碼等
+    - 瀏覽器解析內容後渲染於顯示器上
 2. 什麼是 CORS，如何讓跨網域溝通變得可行？
 3. 說明 HTTP 通訊協定的特性？
 4. HTTP GET 方法和 POST 方法具體的差異是什麼？
