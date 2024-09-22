@@ -1,4 +1,5 @@
 # Immutable
+import copy
 x=3
 y=x
 print(id(y))
@@ -58,3 +59,33 @@ print(id(li[1]))
 test2(li)
 print(li)
 print(id(li[1]))
+
+
+def one2ten():
+  for x in range(1, 11):
+    yield x
+
+x = one2ten()
+
+# 用 for 走訪:
+for i in x:
+  print(i)
+
+# 用 next() 走訪：
+# print(next(x))  # 1
+
+# print(next(x))  # 2
+
+a = [1, [2, 3]]
+b = a # Shallow copy
+a_deepcopy = copy.deepcopy(a) # Deep copy
+print(id(a), id(b), id(a_deepcopy))
+a_deepcopy[0] = 5
+print(a, a_deepcopy)
+"""
+1966485926656
+1966485926656
+1966485924992
+[1, [2, 3]]
+[5, [2, 3]]
+"""

@@ -85,10 +85,10 @@ mysql> explain analyze SELECT * FROM member WHERE username='test' and password='
 
 1. partitions顯示此查詢有命中了那些有作資料表分區的那些分區
 2. type顯示連接使用的類型，可以用來判斷命令執行的效能。
-    - const: 查詢使用主鍵或唯一索引時，表返回僅有一行。
-    - ref: 一般針對於使用非唯一索引的查詢，或普通索引查詢的條件滿足索引的最左匹配原則。
-    - fulltext: 使用到全文索引。
-    - ALL: 全表掃描。實務上看到需要優化。
+   1. const: 查詢使用主鍵或唯一索引時，表返回僅有一行。
+   2. ref: 一般針對於使用非唯一索引的查詢，或普通索引查詢的條件滿足索引的最左匹配原則。
+   3. fulltext: 使用到全文索引。
+   4. ALL: 全表掃描。實務上看到需要優化。
 3. key欄可以判斷MySQL有無使用索引查詢
 4. rows:執行本次查詢找到結果估計需要讀取的數據行數。(就是說你這句查詢需要掃描的行數，所以理想狀態是越少越好。)
 5. filtered: 顯示查詢返回後的數據在過濾後剩下滿足條件的紀錄數比例。
@@ -115,23 +115,25 @@ Many to many 多對多
 
 Message
 
-- id int primary key auto_increment
-- user_id int not null
-- message varchar not null
-- data datetime default current_timestamp
+1. id int primary key auto_increment
+2. user_id int not null
+3. message varchar not null
+4. data datetime default current_timestamp
 
 Tags
 
-- id int primary key auto_increment
-- tag_name varchar not null
+1. id int primary key auto_increment
+2. tag_name varchar not null
 
 (加一個中間的關聯表為此類型的標準設計)
 Message_Tags
 
-- message_id int foreign key on message.id
-- tag_id int foreign key on tags.id
+1. message_id int foreign key on message.id
+2. tag_id int foreign key on tags.id
 
+```sql
 SELECT message.* FROM message 
 INNER JOIN message_tags ON message.id=message_tags.message_id 
 INNER JOIN tags ON message_tags.tag_id=tags.id 
 WHERE tags.tag_name='關鍵字'
+```
