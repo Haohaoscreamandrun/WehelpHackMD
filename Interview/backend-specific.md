@@ -188,6 +188,7 @@
     1. Automatic Documentation: 快速自動產出可互動的API文件(Swagger UI)
     2. data validation: 兼容Pydantic2套件，可以簡單地完成對輸入資料的驗證
     3. standard-based: 立基在OpenAPI標準
+    4. Speed: 是所有python框架中benchmark最快的框架之一，是基於python最新的非同步更新asyncio所產生的速度優勢
 2. 試說明 ASGI Server 的用途？
     1. 非同步處理： ASGI 是 WSGI 的擴展，它支持非同步處理。這意味著一個請求可以被掛起，去處理其他請求，或者等待 I/O 操作完成後再繼續處理。
     2. 適用場景： 需要處理大量並發連線、長時間運行的任務，例如 WebSocket、HTTP/2、Server-Sent Events 等。
